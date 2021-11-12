@@ -1,51 +1,51 @@
 import os, shutil
 from multiprocessing import Process, Queue
+from rdkit import Chem
 
 xyz_dir = './xyz_files'
+max_cores = 1
+cores_per_process = 1
 
 molecule_list = Queue()
-core_list = Queue()
-
-max_cores = 8
-cores_per_process = 4
+cores_list = Queue()
 
 for xyz in os.listdir(xyz_dir):
     molecule_list.put(xyz.strip('.xyz'))
-    print(xyz)
 
-print(molecule_list)
+processes = []
 
 def used_cores():
-    ncores = cores_per_process*core_list.qsize()
+    ncores = cores_per_process*cores_list.qsize()
     return ncores
 
-
-def B97_opt(molecule, charge, spin):
+def single_point(molecule, charge, spin):
     
-    foldername = 'B97_opt' + '/' + molecule + '/'
+    foldername = 'xtb_sp' + '/' + molecule + '/'
 
     if not os.path.exists(foldername):
         os.makedirs(foldername)
-
+        
     shutil.copyfile(
-        xyz_dir + '/' + molecule +'.xyz', 
-        foldername + molecule +'.xyz'
+        xyz_dir + '/' + molecule + '.xyz', 
+        foldername + molecule + '.xyz'
     )
+    
+    os.chdir(foldername)
+    os.system(f'xtb {molecule}.xyz --gfn2 --chrg {charge} --uhf {spin} --alpb water -P {cores_per_process} > {molecule}.out')
+    
+    mol_file = [ f for f in os.listdir('.') if f.endswith('.mol') ][-1]
 
-    with open(foldername + molecule + '.inp', 'w') as file:
+    mol = Chem.MolFromMolFile(mol_file, sanitize=False, removeHs=False, strictParsing=False)
+    smiles = Chem.MolToSmiles(mol)
 
-        file.write(f"""%pal
-  nprocs 1
-end
-%maxcore 375
+    print(f'{molecule}: {smiles}')
 
-! B97-3c Opt Freq
+    cores_list.get()
 
-xyzfile {charge} {spin} {molecule}.xyz
-""")
+    return smiles
 
 
-def xtb_opt(molecule, charge, spin):
+def optimization(molecule, charge, spin):
     
     foldername = 'xtb_opt' + '/' + molecule + '/'
 
@@ -56,27 +56,41 @@ def xtb_opt(molecule, charge, spin):
         xyz_dir + '/' + molecule +'.xyz', 
         foldername + molecule +'.xyz'
     )
+    
+    os.chdir(foldername)
+    os.system(f'xtb {molecule}.xyz --gfn2 --chrg {charge} --uhf {spin} --alpb water --ohess -P {cores_per_process} > {molecule}.out')
 
-    os.system(f'xtb {molecule}.xyz --gfn2 --chrg {charge} --uhf {spin} --alpb water -P {cores_per_process} > {molecule}.out')
-    core_list.get()
+    cores_list.get()
 
-calculation = xtb_opt
-charge = 0
-spin = 0
 
-processes = []
+def deprotonate(molecule, charge, spin):
+    
+    foldername = 'deprotonate' + '/' + molecule + '/'
+
+    if not os.path.exists(foldername):
+        os.makedirs(foldername)
+        
+    shutil.copyfile(
+        xyz_dir + '/' + molecule +'.xyz', 
+        foldername + molecule +'.xyz'
+    )
+    
+    os.chdir(foldername)
+    os.system(f'crest {molecule}.xyz --gfn2 --chrg {charge} --uhf {spin} --alpb water -deprotonate -T {cores_per_process} > {molecule}.out')
+
+    cores_list.get()    
+
 
 while molecule_list.empty() is False:
     if used_cores()+cores_per_process <= max_cores:
         try:
             molecule = molecule_list.get_nowait()
-            worker = Process(target=xtb_opt, args=(molecule, charge, spin))
+            worker = Process(target=single_point, args=(molecule, 0, 0))
             processes.append(worker)
             worker.start()
-            core_list.put(cores_per_process)
+            cores_list.put(cores_per_process)
         except:
             print('Empty queue')
 
 for process in processes:
     process.join()
-    
