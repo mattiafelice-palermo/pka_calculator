@@ -94,15 +94,19 @@ class Calculate_pka:
         os.system(f'crest {self.molecule}.xyz --gfn2 --chrg {self.charge} --uhf {self.spin} --alpb water -deprotonate -T {cores_per_process} > {molecule}.out')
         os.chdir('../../')
 
-    def compare_smiles(self):
-        start_smiles = self.single_point()
-        end_smiles = self.optimization()
-        cores_list.get()
+    def compare_smiles(self, start, end):
 
-        print(f'Molecule: {molecule}')
-        print(f'Start SMILES: {start_smiles}\nEnd SMILES:   {end_smiles}')
-        print(f'Are the two SMILES the same? {start_smiles == end_smiles}\n')
+        print(f'Molecule: {self.molecule}\nStart SMILES: {start}\nEnd SMILES:   {end}\n')
         
+        if start != end:
+            print(f'WARNING! Topology for molecule {self.molecule} has changed!\n')
+
+    def calculate_pka(self):
+        start = self.single_point()
+        end = self.optimization()
+        self.compare_smiles(start, end)
+        self.deprotonate()
+        cores_list.get() 
 
 
 
@@ -110,9 +114,8 @@ while molecule_list.empty() is False:
     if used_cores()+cores_per_process <= max_cores:
         try:
             molecule = molecule_list.get_nowait()
-            charge = 0
-            spin = 0
-            worker = Process(target=Calculate_pka(molecule, charge, spin).compare_smiles, args=())
+            singlet = Calculate_pka(molecule, 0, 0)
+            worker = Process(target=singlet.calculate_pka, args=())
             processes.append(worker)
             worker.start()
             cores_list.put(cores_per_process)
