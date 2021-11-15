@@ -3,7 +3,7 @@ from multiprocessing import Process, Queue
 from rdkit import Chem
 
 xyz_dir = './xyz_files'
-max_cores = 4
+max_cores = 8
 cores_per_process = 1
 
 molecule_list = Queue()
@@ -29,94 +29,80 @@ class Calculate_pka:
 
 
     def single_point(self):
-
-        self.molecule = molecule
-        self.charge = charge
-        self.spin = spin
         
-        foldername = 'xtb_sp' + '/' + molecule + '/'
+        foldername = 'xtb_sp' + '/' + self.molecule + '/'
 
         if not os.path.exists(foldername):
             os.makedirs(foldername)
             
         shutil.copyfile(
-            xyz_dir + '/' + molecule + '.xyz', 
-            foldername + molecule + '.xyz'
+            xyz_dir + '/' + self.molecule + '.xyz', 
+            foldername + self.molecule + '.xyz'
         )
         
         os.chdir(foldername)
-        os.system(f'xtb {molecule}.xyz --gfn2 --chrg {charge} --uhf {spin} --alpb water -P {cores_per_process} > {molecule}.out')
+        os.system(f'xtb {self.molecule}.xyz --gfn2 --chrg {self.charge} --uhf {self.spin} --alpb water -P {cores_per_process} > {self.molecule}.out')
         
         mol_file = [ f for f in os.listdir('.') if f.endswith('.mol') ][-1]
 
         mol = Chem.MolFromMolFile(mol_file, sanitize=False, removeHs=False, strictParsing=False)
         start_smiles = Chem.MolToSmiles(mol)
 
-        print(f'{molecule} starting geometry: {start_smiles}')
-
-        cores_list.get()
+        os.chdir('../../')
         
         return start_smiles
 
 
     def optimization(self):
 
-        self.molecule = molecule
-        self.charge = charge
-        self.spin = spin
-
-        foldername = 'xtb_opt' + '/' + molecule + '/'
+        foldername = 'xtb_opt' + '/' + self.molecule + '/'
 
         if not os.path.exists(foldername):
             os.makedirs(foldername)
             
         shutil.copyfile(
-            xyz_dir + '/' + molecule +'.xyz', 
-            foldername + molecule +'.xyz'
+            xyz_dir + '/' + self.molecule +'.xyz', 
+            foldername + self.molecule +'.xyz'
         )
         
         os.chdir(foldername)
-        os.system(f'xtb {molecule}.xyz --gfn2 --chrg {charge} --uhf {spin} --alpb water --ohess -P {cores_per_process} > {molecule}.out')
+        os.system(f'xtb {self.molecule}.xyz --gfn2 --chrg {self.charge} --uhf {self.spin} --alpb water --ohess -P {cores_per_process} > {self.molecule}.out')
 
         mol_file = [ f for f in os.listdir('.') if f.endswith('.mol') ][-1]
 
         mol = Chem.MolFromMolFile(mol_file, sanitize=False, removeHs=False, strictParsing=False)
         end_smiles = Chem.MolToSmiles(mol)
 
-        print(f'{molecule} final geometry: {end_smiles}')
-
-        cores_list.get()
+        os.chdir('../../')
         
         return end_smiles
 
 
-    def deprotonate(self, molecule, charge, spin):
-        self.molecule = molecule
-        self.charge = charge
-        self.spin = spin
+    def deprotonate(self):
 
-        foldername = 'deprotonate' + '/' + molecule + '/'
+        foldername = 'deprotonate' + '/' + self.molecule + '/'
 
         if not os.path.exists(foldername):
             os.makedirs(foldername)
             
         shutil.copyfile(
-            xyz_dir + '/' + molecule +'.xyz', 
-            foldername + molecule +'.xyz'
+            xyz_dir + '/' + self.molecule +'.xyz', 
+            foldername + self.molecule +'.xyz'
         )
         
         os.chdir(foldername)
-        os.system(f'crest {molecule}.xyz --gfn2 --chrg {charge} --uhf {spin} --alpb water -deprotonate -T {cores_per_process} > {molecule}.out')
+        os.system(f'crest {self.molecule}.xyz --gfn2 --chrg {self.charge} --uhf {self.spin} --alpb water -deprotonate -T {cores_per_process} > {molecule}.out')
+        os.chdir('../../')
 
-        cores_list.get()    
+    def compare_smiles(self):
+        start_smiles = self.single_point()
+        end_smiles = self.optimization()
+        cores_list.get()
 
+        result = 'Start SMILES:' + start_smiles + '\n End SMILES:' + end_smiles
 
-    def compare_smiles(start_smiles, end_smiles):
-        print(f'Start SMILES: {start_smiles}\n End SMILES: {end_smiles}')
+        return result
 
-    start_smiles = single_point()
-    end_smiles = optimization()
-    compare_smiles(start_smiles, end_smiles)
 
 while molecule_list.empty() is False:
     if used_cores()+cores_per_process <= max_cores:
@@ -124,7 +110,7 @@ while molecule_list.empty() is False:
             molecule = molecule_list.get_nowait()
             charge = 0
             spin = 0
-            worker = Process(target=Calculate_pka, args=(molecule, charge, spin))
+            worker = Process(target=Calculate_pka(molecule, charge, spin).compare_smiles, args=())
             processes.append(worker)
             worker.start()
             cores_list.put(cores_per_process)
@@ -133,3 +119,4 @@ while molecule_list.empty() is False:
 
 for process in processes:
     process.join()
+
