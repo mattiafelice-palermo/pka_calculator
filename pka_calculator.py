@@ -99,9 +99,11 @@ class Calculate_pka:
         end_smiles = self.optimization()
         cores_list.get()
 
-        result = 'Start SMILES:' + start_smiles + '\n End SMILES:' + end_smiles
+        print(f'Molecule: {molecule}')
+        print(f'Start SMILES: {start_smiles}\nEnd SMILES:   {end_smiles}')
+        print(f'Are the two SMILES the same? {start_smiles == end_smiles}\n')
+        
 
-        return result
 
 
 while molecule_list.empty() is False:
