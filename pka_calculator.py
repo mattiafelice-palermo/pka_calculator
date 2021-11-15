@@ -3,7 +3,7 @@ from multiprocessing import Process, Queue
 from rdkit import Chem
 
 xyz_dir = './xyz_files'
-max_cores = 1
+max_cores = 4
 cores_per_process = 1
 
 molecule_list = Queue()
@@ -38,7 +38,7 @@ def single_point(molecule, charge, spin):
     mol = Chem.MolFromMolFile(mol_file, sanitize=False, removeHs=False, strictParsing=False)
     smiles = Chem.MolToSmiles(mol)
 
-    print(f'{molecule}: {smiles}')
+    print(f'{molecule} starting geometry: {smiles}')
 
     cores_list.get()
 
@@ -59,6 +59,13 @@ def optimization(molecule, charge, spin):
     
     os.chdir(foldername)
     os.system(f'xtb {molecule}.xyz --gfn2 --chrg {charge} --uhf {spin} --alpb water --ohess -P {cores_per_process} > {molecule}.out')
+
+    mol_file = [ f for f in os.listdir('.') if f.endswith('.mol') ][-1]
+
+    mol = Chem.MolFromMolFile(mol_file, sanitize=False, removeHs=False, strictParsing=False)
+    smiles = Chem.MolToSmiles(mol)
+
+    print(f'{molecule} final geometry: {smiles}')
 
     cores_list.get()
 
@@ -85,7 +92,7 @@ while molecule_list.empty() is False:
     if used_cores()+cores_per_process <= max_cores:
         try:
             molecule = molecule_list.get_nowait()
-            worker = Process(target=single_point, args=(molecule, 0, 0))
+            worker = Process(target=optimization, args=(molecule, 0, 0))
             processes.append(worker)
             worker.start()
             cores_list.put(cores_per_process)
