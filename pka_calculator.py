@@ -2,14 +2,15 @@ import os, shutil
 from multiprocessing import Process, Queue
 from rdkit import Chem
 
-xyz_dir = './xyz_files'
-max_cores = 8
+verbose = 1
+
+max_cores = 4
 cores_per_process = 1
 
 molecule_list = Queue()
 cores_list = Queue()
 
-for xyz in os.listdir(xyz_dir):
+for xyz in os.listdir('./xyz_files'):
     molecule_list.put(xyz.strip('.xyz'))
 
 processes = []
@@ -28,10 +29,8 @@ class Calculate_pka:
         self.spin = spin
 
 
-    def single_point(self):
+    def single_point(self, xyz_dir, foldername, charge, spin):
         
-        foldername = 'xtb_sp' + '/' + self.molecule + '/'
-
         if not os.path.exists(foldername):
             os.makedirs(foldername)
             
@@ -41,21 +40,19 @@ class Calculate_pka:
         )
         
         os.chdir(foldername)
-        os.system(f'xtb {self.molecule}.xyz --gfn2 --chrg {self.charge} --uhf {self.spin} --alpb water -P {cores_per_process} > {self.molecule}.out')
+        os.system(f'xtb {self.molecule}.xyz --gfn2 --chrg {charge} --uhf {spin} --alpb water -P {cores_per_process} > {self.molecule}.out')
         
         mol_file = [ f for f in os.listdir('.') if f.endswith('.mol') ][-1]
 
-        mol = Chem.MolFromMolFile(mol_file, sanitize=False, removeHs=False, strictParsing=False)
-        start_smiles = Chem.MolToSmiles(mol)
+        start_mol = Chem.MolFromMolFile(mol_file, sanitize=False, removeHs=False, strictParsing=False)
+        start_smiles = Chem.MolToSmiles(start_mol)
 
         os.chdir('../../')
         
-        return start_smiles
+        return start_smiles, start_mol
 
 
-    def optimization(self):
-
-        foldername = 'xtb_opt' + '/' + self.molecule + '/'
+    def optimization(self, xyz_dir, foldername, charge, spin):
 
         if not os.path.exists(foldername):
             os.makedirs(foldername)
@@ -66,22 +63,25 @@ class Calculate_pka:
         )
         
         os.chdir(foldername)
-        os.system(f'xtb {self.molecule}.xyz --gfn2 --chrg {self.charge} --uhf {self.spin} --alpb water --ohess -P {cores_per_process} > {self.molecule}.out')
+        os.system(f'xtb {self.molecule}.xyz --gfn2 --chrg {charge} --uhf {spin} --alpb water --ohess -P {cores_per_process} > {self.molecule}.out')
 
         mol_file = [ f for f in os.listdir('.') if f.endswith('.mol') ][-1]
 
-        mol = Chem.MolFromMolFile(mol_file, sanitize=False, removeHs=False, strictParsing=False)
-        end_smiles = Chem.MolToSmiles(mol)
+        end_mol = Chem.MolFromMolFile(mol_file, sanitize=False, removeHs=False, strictParsing=False)
+        end_smiles = Chem.MolToSmiles(end_mol)
 
         os.chdir('../../')
         
-        return end_smiles
+        return end_smiles, end_mol
 
 
-    def deprotonate(self):
+    def deprotonate(self, xyz_dir, foldername, charge, spin):
 
         foldername = 'deprotonate' + '/' + self.molecule + '/'
 
+        if not os.path.exists('deprotonate/xyz_files'):
+            os.makedirs('deprotonate/xyz_files')
+
         if not os.path.exists(foldername):
             os.makedirs(foldername)
             
@@ -91,21 +91,65 @@ class Calculate_pka:
         )
         
         os.chdir(foldername)
-        os.system(f'crest {self.molecule}.xyz --gfn2 --chrg {self.charge} --uhf {self.spin} --alpb water -deprotonate -T {cores_per_process} > {molecule}.out')
+        os.system(f'crest {self.molecule}.xyz --gfn2 --chrg {charge} --uhf {spin} --alpb water -deprotonate -T {cores_per_process} > {molecule}.out')
+        
+        shutil.copyfile(
+            'deprotonated.xyz', 
+            '../xyz_files/' + self.molecule + '.xyz'
+        )
+        
         os.chdir('../../')
 
     def compare_smiles(self, start, end):
 
-        print(f'Molecule: {self.molecule}\nStart SMILES: {start}\nEnd SMILES:   {end}\n')
+        if verbose == 1:
+            print(f'Molecule: {self.molecule}\nStart SMILES: {start}\nEnd SMILES:   {end}\n')
         
         if start != end:
             print(f'WARNING! Topology for molecule {self.molecule} has changed!\n')
 
+
     def calculate_pka(self):
-        start = self.single_point()
-        end = self.optimization()
-        self.compare_smiles(start, end)
-        self.deprotonate()
+
+        print('### Protonated ###')
+
+        start_smiles, start_mol = self.single_point(
+            './xyz_files', 
+            'xtb_sp/'+self.molecule+'/', 
+            self.charge, 
+            self.spin
+        )
+        end_smiles, end_mol = self.optimization(
+            './xyz_files', 
+            'xtb_opt/'+self.molecule+'/', 
+            self.charge, 
+            self.spin
+        )
+        self.compare_smiles(start_smiles, end_smiles)
+
+        print('### Deprotonated ###')
+
+        self.deprotonate(
+            './xyz_files', 
+            'deprotonate/'+self.molecule+'/',
+            self.charge, 
+            self.spin
+        )
+
+        start_smiles, start_mol = self.single_point(
+            './deprotonate/xyz_files', 
+            'xtb_sp_deprot/'+self.molecule+'/', 
+            self.charge+1, 
+            self.spin
+        )
+        end_smiles, end_mol = self.optimization(
+            './deprotonate/xyz_files', 
+            'xtb_opt_deprot/'+self.molecule+'/', 
+            self.charge+1, 
+            self.spin
+        )
+        self.compare_smiles(start_smiles, end_smiles)
+
         cores_list.get() 
 
 

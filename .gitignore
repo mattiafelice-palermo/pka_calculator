@@ -1,6 +1,8 @@
 xtb_sp/
 xtb_opt/
 deprotonate/
+xtb_sp_deprot/
+xtb_opt_deprot/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
