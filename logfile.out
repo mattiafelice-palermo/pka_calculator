@@ -1,350 +1,347 @@
 --- Running pKa calculation ---
 
-Molecule: 01_2,6-dimethoxyphenol
-Start SMILES: [H]Oc1c(OC([H])([H])[H])c([H])c([H])c([H])c1OC([H])([H])[H]
-End SMILES:   [H]Oc1c(OC([H])([H])[H])c([H])c([H])c([H])c1OC([H])([H])[H]
-
-Molecule: 01_2,6-dimethoxyphenol
-Start SMILES: [H]c1c(OC([H])([H])[H])c(o)c(OC([H])([H])[H])c([H])[c-]1[H]
-End SMILES:   [H]c1c(OC([H])([H])[H])c(o)c(OC([H])([H])[H])c([H])[c-]1[H]
-
-Molecule: 02_2-methoxy-4-formylphenol
-Start SMILES: [H]Oc1c([H])c([H])c(C([H])=O)c([H])c1OC([H])([H])[H]
-End SMILES:   [H]Oc1c([H])c([H])c(C([H])=O)c([H])c1OC([H])([H])[H]
-
-Molecule: 02_2-methoxy-4-formylphenol
-Start SMILES: [H]c1c(o)C(OC([H])([H])[H])=c([H])[c-](c([H])=O)c=1[H]
-End SMILES:   [H]c1c(o)C(OC([H])([H])[H])=c([H])[c-](c([H])=O)c=1[H]
-
 Molecule: 03_2-methoxyphenol
-Start SMILES: [H]Oc1c([H])c([H])c([H])c([H])c1OC([H])([H])[H]
-End SMILES:   [H]Oc1c([H])c([H])c([H])c([H])c1OC([H])([H])[H]
+Start SMILES: [H]oc1c([H])c([H])[c+]([H])c([H])c-1OC([H])([H])[H]
+End SMILES:   [H]oc1c([H])=c([H])[c+]([H])=c([H])c-1oC([H])([H])[H]
+WARNING! Topology for molecule 03_2-methoxyphenol has changed!
 
 Molecule: 04_3-hydroxy-acetophenone
-Start SMILES: [H]Oc1c([H])c([H])c([H])c(C(=O)C([H])([H])[H])c1[H]
-End SMILES:   [H]Oc1c([H])c([H])c([H])c(C(=O)C([H])([H])[H])c1[H]
+Start SMILES: [H]Oc1c([H])c([H])[c+]([H])c(C(=O)C([H])([H])[H])c1[H]
+End SMILES:   [H]oc1c([H])=c([H])[c+]([H])c(C(=O)C([H])([H])[H])c1[H]
+WARNING! Topology for molecule 04_3-hydroxy-acetophenone has changed!
+
+Molecule: 02_2-methoxy-4-formylphenol
+Start SMILES: [H]oc1c([H])=c([H])[c+](C([H])=O)c([H])c-1OC([H])([H])[H]
+End SMILES:   [H]oc1c([H])=c([H])[c+](C([H])=O)c([H])c-1oC([H])([H])[H]
+WARNING! Topology for molecule 02_2-methoxy-4-formylphenol has changed!
+
+Molecule: 01_2,6-dimethoxyphenol
+Start SMILES: [H]oc1c(OC([H])([H])[H])c([H])[c+]([H])c([H])c-1OC([H])([H])[H]
+End SMILES:   [H]oc1-c(OC([H])([H])[H])c([H])[c+]([H])c([H])c-1OC([H])([H])[H]
+WARNING! Topology for molecule 01_2,6-dimethoxyphenol has changed!
 
 Molecule: 03_2-methoxyphenol
-Start SMILES: [H]c1c(o)-c(OC([H])([H])[H])c([H])[c-]([H])c1[H]
-End SMILES:   [H]c1c(o)-c(OC([H])([H])[H])c([H])[c-]([H])c1[H]
+Start SMILES: [H]C1=c([H])c([H])c([H])c(OC([H])([H])[H])C1=O
+End SMILES:   [H]C1=c([H])c([H])c([H])c(OC([H])([H])[H])C1=O
 
 Molecule: 05_3-methoxyphenol
-Start SMILES: [H]Oc1c([H])c([H])c([H])c(OC([H])([H])[H])c1[H]
-End SMILES:   [H]Oc1c([H])c([H])c([H])c(OC([H])([H])[H])c1[H]
+Start SMILES: [H]Oc1c([H])c([H])[c+]([H])c(OC([H])([H])[H])c1[H]
+End SMILES:   [H]Oc1c([H])c(oC([H])([H])[H])-[c+]([H])c([H])c-1[H]
+WARNING! Topology for molecule 05_3-methoxyphenol has changed!
 
 Molecule: 04_3-hydroxy-acetophenone
-Start SMILES: [H]c1c([H])[c-]([H])c(C(=O)C([H])([H])[H])c([H])c1o
-End SMILES:   [H]c1c([H])[c-]([H])c(C(=O)C([H])([H])[H])c([H])c1o
+Start SMILES: [H]C1=c([H])c([H])c(C(=O)C([H])([H])[H])=C([H])C1=O
+End SMILES:   [H]C1=c([H])c([H])c(C(=O)C([H])([H])[H])=C([H])C1=O
+
+Molecule: 02_2-methoxy-4-formylphenol
+Start SMILES: [H]Oc1c([H])=C([H])c(c=O)-c([H])c1OC([H])([H])[H]
+End SMILES:   [H]Oc1c([H])=C([H])c(c=O)-c([H])c1OC([H])([H])[H]
+
+Molecule: 07_4-ethylphenol
+Start SMILES: [H]oc1c([H])=c([H])[c+](C([H])([H])C([H])([H])[H])c([H])=c1[H]
+End SMILES:   [H]oc1c([H])=c([H])[c+](C([H])([H])C([H])([H])[H])c([H])=C1[H]
+WARNING! Topology for molecule 07_4-ethylphenol has changed!
 
 Molecule: 06_4-ethyl-2-methoxyphenol
-Start SMILES: [H]Oc1c([H])c([H])c(C([H])([H])C([H])([H])[H])c([H])c1OC([H])([H])[H]
-End SMILES:   [H]Oc1c([H])c([H])c(C([H])([H])C([H])([H])[H])c([H])c1OC([H])([H])[H]
+Start SMILES: [H]Oc1c([H])c([H])[c+](C([H])([H])C([H])([H])[H])c([H])c-1OC([H])([H])[H]
+End SMILES:   [H]oc1c([H])=c([H])[c+](C([H])([H])C([H])([H])[H])c([H])c-1OC([H])([H])[H]
+WARNING! Topology for molecule 06_4-ethyl-2-methoxyphenol has changed!
+
+Molecule: 01_2,6-dimethoxyphenol
+Start SMILES: [H]c1c(OC([H])([H])[H])C(=O)c(OC([H])([H])[H])c([H])c1[H]
+End SMILES:   [H]c1c(OC([H])([H])[H])C(=O)c(OC([H])([H])[H])c([H])c1[H]
+
+Molecule: 08_4-hydroxy-acetophenone
+Start SMILES: [H]oc1c([H])=c([H])[c+](C(=O)C([H])([H])[H])c([H])=c1[H]
+End SMILES:   [H]oc1c([H])=c([H])[c+](C(=O)C([H])([H])[H])c([H])=C1[H]
+WARNING! Topology for molecule 08_4-hydroxy-acetophenone has changed!
 
 Molecule: 05_3-methoxyphenol
-Start SMILES: [H]c1c(o)c([H])c(OC([H])([H])[H])[c-]([H])c=1[H]
-End SMILES:   [H]c1c(o)c([H])c(OC([H])([H])[H])[c-]([H])c=1[H]
+Start SMILES: [H]C1=c([H])c([H])c(OC([H])([H])[H])c([H])C1=O
+End SMILES:   [H]C1=c([H])c([H])c(OC([H])([H])[H])c([H])C1=O
+
+Molecule: 09_4-methoxyphenol
+Start SMILES: [H]Oc1c([H])=c([H])[c+](OC([H])([H])[H])c([H])=c1[H]
+End SMILES:   [H]oc1c([H])=C([H])[c+](oC([H])([H])[H])c([H])=c1[H]
+WARNING! Topology for molecule 09_4-methoxyphenol has changed!
+
+Molecule: 08_4-hydroxy-acetophenone
+Start SMILES: [H]C1=c([H])c(C(=O)C([H])([H])[H])c([H])=C([H])C1=O
+End SMILES:   [H]C1=c([H])c(C(=O)C([H])([H])[H])c([H])=C([H])C1=O
 
 Molecule: 07_4-ethylphenol
-Start SMILES: [H]Oc1c([H])c([H])c(C([H])([H])C([H])([H])[H])c([H])c1[H]
-End SMILES:   [H]Oc1c([H])c([H])c(C([H])([H])C([H])([H])[H])c([H])c1[H]
+Start SMILES: [H]Oc1c([H])=c([H])c(c([H])C([H])([H])[H])c([H])=c1[H]
+End SMILES:   [H]Oc1c([H])=c([H])c(c([H])C([H])([H])[H])c([H])=c1[H]
+
+Molecule: 11_triclosan
+Start SMILES: [H]Oc1c([H])c(Cl)c([H])c([H])c1Oc1c(Cl)c([H])c(Cl)[c+]([H])c1[H]
+End SMILES:   [H]Oc1c([H])c(Cl)c([H])=c([H])c-1Oc1c([H])=[c+]([H])c(Cl)c([H])c1Cl
+WARNING! Topology for molecule 11_triclosan has changed!
+
+Molecule: 10_bisphenol-A
+Start SMILES: [H]Oc1c([H])=c([H])c(C([c+]2c([H])=c([H])c(O[H])c([H])c2[H])(C([H])([H])[H])C([H])([H])[H])c([H])c1[H]
+End SMILES:   [H]Oc1c([H])=c([H])c(C([c+]2c([H])=c([H])c(O[H])c([H])=c2[H])(C([H])([H])[H])C([H])([H])[H])c([H])=c1[H]
+WARNING! Topology for molecule 10_bisphenol-A has changed!
 
 Molecule: 06_4-ethyl-2-methoxyphenol
-Start SMILES: [H]c1c(o)-c(OC([H])([H])[H])c([H])[c-](C([H])([H])C([H])([H])[H])c1[H]
-End SMILES:   [H]c1c(o)-c(OC([H])([H])[H])c([H])[c-](C([H])([H])C([H])([H])[H])c1[H]
-
-Molecule: 08_4-hydroxy-acetophenone
-Start SMILES: [H]Oc1c([H])c([H])c(C(=O)C([H])([H])[H])c([H])c1[H]
-End SMILES:   [H]Oc1c([H])c([H])c(C(=O)C([H])([H])[H])c([H])c1[H]
-
-Molecule: 07_4-ethylphenol
-Start SMILES: [H]c1c([H])[c-](C([H])([H])C([H])([H])[H])c([H])c([H])c1o
-End SMILES:   [H]c1c([H])[c-](C([H])([H])C([H])([H])[H])c([H])c([H])c1o
-
-Molecule: 09_4-methoxyphenol
-Start SMILES: [H]Oc1c([H])c([H])c(OC([H])([H])[H])c([H])c1[H]
-End SMILES:   [H]Oc1c([H])c([H])c(OC([H])([H])[H])c([H])c1[H]
-
-Molecule: 08_4-hydroxy-acetophenone
-Start SMILES: [H]C1=c([H])[c-](C(=O)C([H])([H])[H])c([H])=C([H])c1o
-End SMILES:   [H]C1=c([H])[c-](C(=O)C([H])([H])[H])c([H])=C([H])c1o
-
-Molecule: 09_4-methoxyphenol
-Start SMILES: [H]c1c([H])[c-](OC([H])([H])[H])c([H])c([H])c1o
-End SMILES:   [H]c1c([H])[c-](OC([H])([H])[H])c([H])c([H])c1o
-
-Molecule: 10_bisphenol-A
-Start SMILES: [H]Oc1c([H])c([H])c(C(c2c([H])c([H])c(O[H])c([H])c2[H])(C([H])([H])[H])C([H])([H])[H])c([H])c1[H]
-End SMILES:   [H]Oc1c([H])c([H])c(C(c2c([H])c([H])c(O[H])c([H])c2[H])(C([H])([H])[H])C([H])([H])[H])c([H])c1[H]
-
-Molecule: 10_bisphenol-A
-Start SMILES: [H]Oc1c([H])c([H])[c-](C(c2c([H])=c([H])c(o)c([H])c2[H])(C([H])([H])[H])C([H])([H])[H])c([H])c1[H]
-End SMILES:   [H]Oc1c([H])c([H])[c-](C(c2c([H])=c([H])c(o)c([H])c2[H])(C([H])([H])[H])C([H])([H])[H])c([H])c1[H]
-
-Molecule: 11_triclosan
-Start SMILES: [H]Oc1c([H])c(Cl)c([H])c([H])c1Oc1c([H])c([H])c(Cl)c([H])c1Cl
-End SMILES:   [H]Oc1c([H])c(Cl)c([H])c([H])c1Oc1c([H])c([H])c(Cl)c([H])c1Cl
-
-Molecule: 11_triclosan
-Start SMILES: [H]c1c(Oc2c(Cl)c([H])c(Cl)[c-]([H])c2[H])-c(o)c([H])c(Cl)c1[H]
-End SMILES:   [H]c1c(Oc2c(Cl)c([H])c(Cl)[c-]([H])c2[H])-c(o)c([H])c(Cl)c1[H]
+Start SMILES: [H]C1=c([H])c(C([H])([H])C([H])([H])[H])c([H])c(OC([H])([H])[H])C1=O
+End SMILES:   [H]C1=c([H])c(C([H])([H])C([H])([H])[H])c([H])c(OC([H])([H])[H])C1=O
 
 Molecule: 12_3-chlorophenol
-Start SMILES: [H]Oc1c([H])c([H])c([H])c(Cl)c1[H]
-End SMILES:   [H]Oc1c([H])c([H])c([H])c(Cl)c1[H]
+Start SMILES: [H]oc1c([H])c([H])[c+]([H])c(Cl)c1[H]
+End SMILES:   [H]oc1c([H])c(Cl)[c+]([H])c([H])=C1[H]
+WARNING! Topology for molecule 12_3-chlorophenol has changed!
+
+Molecule: 09_4-methoxyphenol
+Start SMILES: [H]C1=c([H])c(OC([H])([H])[H])c([H])=C([H])C1=O
+End SMILES:   [H]C1=c([H])c(OC([H])([H])[H])c([H])=C([H])C1=O
 
 Molecule: 13_2,4,6-trichlorophenol
-Start SMILES: [H]Oc1c(Cl)c([H])c(Cl)c([H])c1Cl
-End SMILES:   [H]Oc1c(Cl)c([H])c(Cl)c([H])c1Cl
+Start SMILES: [H]oc1c(Cl)c([H])[c+](Cl)c([H])c1Cl
+End SMILES:   [H]oc1-c(Cl)c([H])[c+](Cl)c([H])c-1Cl
+WARNING! Topology for molecule 13_2,4,6-trichlorophenol has changed!
 
 Molecule: 12_3-chlorophenol
-Start SMILES: [H]c1c(o)c([H])c(Cl)[c-]([H])c=1[H]
-End SMILES:   [H]c1c(o)c([H])c(Cl)[c-]([H])c=1[H]
+Start SMILES: [H]C1=c([H])c([H])c(Cl)=C([H])C1=O
+End SMILES:   [H]C1=c([H])c([H])c(Cl)=C([H])C1=O
 
 Molecule: 14_2,4-dinitrophenol
-Start SMILES: [H]oc1c([H])=c([H])c(-n2o-o2)c([H])c1-n1o-o1
-End SMILES:   [H]oc1c([H])=c([H])c(-n2o-o2)c([H])c1-n1o-o1
+Start SMILES: [H]oc1-c([H])c([H])[c+](-n2o-o2)c([H])c-1-n1o-o1
+End SMILES:   [H]oc1C([H])=c([H])[c+](-n2o-o2)c([H])=C1n1oO=1
+WARNING! Topology for molecule 14_2,4-dinitrophenol has changed!
 
 Molecule: 13_2,4,6-trichlorophenol
-Start SMILES: [H]c1c(Cl)c(o)c(Cl)c([H])[c-]1Cl
-End SMILES:   [H]c1c(Cl)c(o)c(Cl)c([H])[c-]1Cl
+Start SMILES: [H]c1c(Cl)c([H])=C(Cl)C(=O)C=1Cl
+End SMILES:   [H]c1c(Cl)c([H])=C(Cl)C(=O)C=1Cl
+
+Molecule: 11_triclosan
+Start SMILES: [H]C1=c(Cl)c([H])c([H])c(Oc2c([H])c([H])c(Cl)c([H])c2Cl)C1=O
+End SMILES:   [H]C1=c(Cl)c([H])c([H])c(Oc2c([H])c([H])c(Cl)c([H])c2Cl)C1=O
 
 Molecule: 15_2,5-dimethylphenol
-Start SMILES: [H]Oc1c([H])c(C([H])([H])[H])c([H])c([H])c1C([H])([H])[H]
-End SMILES:   [H]Oc1c([H])c(C([H])([H])[H])c([H])c([H])c1C([H])([H])[H]
-
-Molecule: 14_2,4-dinitrophenol
-Start SMILES: [H]C1=c([H])[c-](-n(o)o)c([H])c(-n(o)o)C1=O
-End SMILES:   [H]C1=c([H])[c-](-n(o)o)c([H])c(-n(o)o)C1=O
+Start SMILES: [H]Oc1c([H])c(C([H])([H])[H])[c+]([H])c([H])c-1C([H])([H])[H]
+End SMILES:   [H]oc1c([H])c(C([H])([H])[H])-[c+]([H])c([H])c-1C([H])([H])[H]
+WARNING! Topology for molecule 15_2,5-dimethylphenol has changed!
 
 Molecule: 16_2-chlorophenol
-Start SMILES: [H]Oc1c([H])c([H])c([H])c([H])c1Cl
-End SMILES:   [H]Oc1c([H])c([H])c([H])c([H])c1Cl
+Start SMILES: [H]oc1c([H])=c([H])[c+]([H])c([H])c-1Cl
+End SMILES:   [H]oc1c([H])=c([H])[c+]([H])c([H])c-1Cl
+
+Molecule: 14_2,4-dinitrophenol
+Start SMILES: [H]C1=c([H])c(-n2o-o2)c([H])c(-n2o-o2)C1=O
+End SMILES:   [H]C1=c([H])c(-n2o-o2)c([H])c(-n2o-o2)C1=O
 
 Molecule: 17_2-phenylphenol
-Start SMILES: [H]Oc1c([H])c([H])c([H])c([H])c1-c1c([H])c([H])c([H])c([H])c1[H]
-End SMILES:   [H]Oc1c([H])c([H])c([H])c([H])c1-c1c([H])c([H])c([H])c([H])c1[H]
+Start SMILES: [H]Oc1c([H])=c([H])[c+]([H])c([H])c-1-c1c([H])c([H])c([H])c([H])c1[H]
+End SMILES:   [H]oc1c([H])=c([H])[c+]([H])c([H])c-1-c1c([H])c([H])c([H])c([H])c1[H]
+WARNING! Topology for molecule 17_2-phenylphenol has changed!
 
 Molecule: 16_2-chlorophenol
-Start SMILES: [H]c1c(o)c(Cl)c([H])[c-]([H])c=1[H]
-End SMILES:   [H]c1c(o)c(Cl)c([H])[c-]([H])c=1[H]
-
-Molecule: 15_2,5-dimethylphenol
-Start SMILES: [H]c1c(C([H])([H])[H])[c-]([H])c([H])c(C([H])([H])[H])c1o
-End SMILES:   [H]c1c(C([H])([H])[H])[c-]([H])c([H])c(C([H])([H])[H])c1o
+Start SMILES: [H]C1=c([H])c([H])c([H])c(Cl)C1=O
+End SMILES:   [H]C1=c([H])c([H])c([H])c(Cl)C1=O
 
 Molecule: 18_4-nitrophenol
-Start SMILES: [H]Oc1c([H])=c([H])c(-n2o-o2)c([H])c1[H]
-End SMILES:   [H]Oc1c([H])=c([H])c(-n2o-o2)c([H])=c1[H]
-WARNING! Topology for molecule 18_4-nitrophenol has changed!
+Start SMILES: [H]oc1C([H])=c([H])[c+](-n2o-o2)c([H])=C1[H]
+End SMILES:   [H]oc1C([H])=c([H])[c+](-n2o-o2)c([H])=C1[H]
 
-Molecule: 17_2-phenylphenol
-Start SMILES: [H]c1c(o)-c(-c2c([H])c([H])c([H])c([H])c2[H])c([H])[c-]([H])c=1[H]
-End SMILES:   [H]c1c(o)-c(-c2c([H])c([H])c([H])c([H])c2[H])c([H])[c-]([H])c=1[H]
+Molecule: 15_2,5-dimethylphenol
+Start SMILES: [H]C1=c(C([H])([H])[H])c([H])c([H])c(C([H])([H])[H])C1=O
+End SMILES:   [H]C1=c(C([H])([H])[H])c([H])c([H])c(C([H])([H])[H])C1=O
 
 Molecule: 19_4-cyanophenol
-Start SMILES: [H]Oc1c([H])c([H])c(C#N)c([H])c1[H]
-End SMILES:   [H]Oc1c([H])c([H])c(C#N)c([H])c1[H]
+Start SMILES: [H]oc1c([H])=c([H])[c+](C#N)c([H])=c1[H]
+End SMILES:   [H]oc1C([H])=c([H])[c+](C#N)c([H])=C1[H]
+WARNING! Topology for molecule 19_4-cyanophenol has changed!
+
+Molecule: 10_bisphenol-A
+Start SMILES: [H]Oc1c([H])c([H])c(C(c2c([H])=C([H])C(=O)C([H])=c2[H])(C([H])([H])[H])C([H])([H])[H])c([H])c1[H]
+End SMILES:   [H]Oc1c([H])c([H])c(C(c2c([H])=C([H])C(=O)C([H])=c2[H])(C([H])([H])[H])C([H])([H])[H])c([H])c1[H]
 
 Molecule: 18_4-nitrophenol
-Start SMILES: [H]C1=c([H])[c-](-n(o)o)c([H])=C([H])C1=O
-End SMILES:   [H]C1=c([H])[c-](-n(o)o)c([H])=C([H])C1=O
+Start SMILES: [H]C1=c([H])c(-n2o-o2)c([H])=C([H])C1=O
+End SMILES:   [H]C1=c([H])c(-n2o-o2)c([H])=C([H])C1=O
 
 Molecule: 20_2-methoxy-5-nitroaniline
-Start SMILES: [H]c1c([H])c(-n2o-o2)c([H])c(N([H])[H])c1OC([H])([H])[H]
-End SMILES:   [H]c1c([H])c(OC([H])([H])[H])c(n([H])[H])c([H])c1-n(o)o
+Start SMILES: [H]c1c(-n2o-o2)[c+]([H])c([H])c(oC([H])([H])[H])-c1n([H])[H]
+End SMILES:   [H]c1c(oC([H])([H])[H])-c(n([H])[H])c([H])c(-n2o-o2)[c+]=1[H]
 WARNING! Topology for molecule 20_2-methoxy-5-nitroaniline has changed!
 
+Molecule: 21_2-methoxyaniline
+Start SMILES: [H]c1c(n([H])[H])-c(OC([H])([H])[H])c([H])[c+]([H])c=1[H]
+End SMILES:   [H]c1c(n([H])[H])-c(OC([H])([H])[H])c([H])[c+]([H])c=1[H]
+
+Molecule: 17_2-phenylphenol
+Start SMILES: [H]C1=c([H])c([H])c([H])c(-c2c([H])c([H])c([H])c([H])c2[H])C1=O
+End SMILES:   [H]C1=c([H])c([H])c([H])c(-c2c([H])c([H])c([H])c([H])c2[H])C1=O
+
+Molecule: 22_3-methoxyaniline
+Start SMILES: [H]c1c([H])[c+]([H])c(OC([H])([H])[H])c([H])c1n([H])[H]
+End SMILES:   [H]C1=c([H])[c+]([H])c(OC([H])([H])[H])c([H])c1n([H])[H]
+WARNING! Topology for molecule 22_3-methoxyaniline has changed!
+
 Molecule: 19_4-cyanophenol
-Start SMILES: [H]c1c(o)c([H])=c([H])[c-](C#N)c=1[H]
-End SMILES:   [H]c1c(o)c([H])=c([H])[c-](C#N)c=1[H]
+Start SMILES: [H]C1=c([H])c(C#N)c([H])=C([H])C1=O
+End SMILES:   [H]C1=c([H])c(C#N)c([H])=C([H])C1=O
+
+Molecule: 23_4-methoxyaniline
+Start SMILES: [H]c1c(n([H])[H])c([H])=c([H])[c+](OC([H])([H])[H])c=1[H]
+End SMILES:   [H]C1=c([H])[c+](oC([H])([H])[H])c([H])=C([H])c1n([H])[H]
+WARNING! Topology for molecule 23_4-methoxyaniline has changed!
 
 Molecule: 20_2-methoxy-5-nitroaniline
-Start SMILES: [H]/N=c1/c([H])c(-n(o)o)[c-]([H])c([H])c-1OC([H])([H])[H]
-End SMILES:   [H]/N=c1/c([H])c(-n(o)o)[c-]([H])c([H])c-1OC([H])([H])[H]
-
-Molecule: 21_2-methoxyaniline
-Start SMILES: [H]c1c([H])c([H])c(N([H])[H])c(OC([H])([H])[H])c1[H]
-End SMILES:   [H]c1c([H])c([H])c(N([H])[H])c(OC([H])([H])[H])c1[H]
-
-Molecule: 21_2-methoxyaniline
-Start SMILES: [H]nc1c([H])c([H])[c-]([H])c([H])c-1OC([H])([H])[H]
-End SMILES:   [H]nc1c([H])c([H])[c-]([H])c([H])c-1OC([H])([H])[H]
-
-Molecule: 22_3-methoxyaniline
-Start SMILES: [H]c1c([H])c(OC([H])([H])[H])c([H])c(N([H])[H])c1[H]
-End SMILES:   [H]c1c([H])c(OC([H])([H])[H])c([H])c(N([H])[H])c1[H]
-
-Molecule: 22_3-methoxyaniline
-Start SMILES: [H]nc1c([H])=c([H])[c-]([H])c(OC([H])([H])[H])c1[H]
-End SMILES:   [H]nc1c([H])=c([H])[c-]([H])c(OC([H])([H])[H])c1[H]
-
-Molecule: 23_4-methoxyaniline
-Start SMILES: [H]c1c([H])c(N([H])[H])c([H])c([H])c1OC([H])([H])[H]
-End SMILES:   [H]c1c([H])c(N([H])[H])c([H])c([H])c1OC([H])([H])[H]
+Start SMILES: [H]c([H])o-c1c([H])=c([H])c(-n(o)o)c([H])c-1n([H])[H]
+End SMILES:   [H]c([H])o-c1c([H])=c([H])c(-n(o)o)c([H])c-1n([H])[H]
 
 Molecule: 24_2-chloroaniline
-Start SMILES: [H]c1c([H])c([H])c(N([H])[H])c(Cl)c1[H]
-End SMILES:   [H]c1c([H])c([H])c(n([H])[H])c(Cl)c1[H]
+Start SMILES: [H]c1c(n([H])[H])-c(Cl)c([H])[c+]([H])c=1[H]
+End SMILES:   [H]C1=c([H])[c+]([H])c([H])c(Cl)-c1n([H])[H]
 WARNING! Topology for molecule 24_2-chloroaniline has changed!
 
-Molecule: 23_4-methoxyaniline
-Start SMILES: [H]nc1c([H])=c([H])[c-](OC([H])([H])[H])c([H])c1[H]
-End SMILES:   [H]nc1c([H])=c([H])[c-](OC([H])([H])[H])c([H])c1[H]
+Molecule: 21_2-methoxyaniline
+Start SMILES: [H]/N=C1/C([H])=c([H])c([H])c([H])c1OC([H])([H])[H]
+End SMILES:   [H]/N=C1/C([H])=c([H])c([H])c([H])c1OC([H])([H])[H]
 
 Molecule: 25_4-chloroaniline
-Start SMILES: [H]c1c([H])c(N([H])[H])c([H])c([H])c1Cl
-End SMILES:   [H]c1c(Cl)c([H])c([H])c(n([H])[H])c1[H]
+Start SMILES: [H]c1c(n([H])[H])c([H])=c([H])[c+](Cl)c=1[H]
+End SMILES:   [H]C1=c([H])[c+](Cl)c([H])=C([H])c1n([H])[H]
 WARNING! Topology for molecule 25_4-chloroaniline has changed!
 
-Molecule: 24_2-chloroaniline
-Start SMILES: [H]nc1C([H])=c([H])[c-]([H])c([H])c-1Cl
-End SMILES:   [H]nc1C([H])=c([H])[c-]([H])c([H])c-1Cl
+Molecule: 22_3-methoxyaniline
+Start SMILES: [H]/N=C1\C([H])=c([H])c([H])c(OC([H])([H])[H])c1[H]
+End SMILES:   [H]/N=C1\C([H])=c([H])c([H])c(OC([H])([H])[H])c1[H]
 
 Molecule: 26_4-methylaniline
-Start SMILES: [H]c1c([H])c(C([H])([H])[H])c([H])c([H])c1N([H])[H]
-End SMILES:   [H]c1c([H])c(C([H])([H])[H])c([H])c([H])c1N([H])[H]
+Start SMILES: [H]c1c(n([H])[H])c([H])=c([H])[c+](C([H])([H])[H])c=1[H]
+End SMILES:   [H]C1=c([H])[c+](C([H])([H])[H])c([H])=C([H])c1n([H])[H]
+WARNING! Topology for molecule 26_4-methylaniline has changed!
+
+Molecule: 23_4-methoxyaniline
+Start SMILES: [H]N=C1C([H])=c([H])c(OC([H])([H])[H])c([H])=C1[H]
+End SMILES:   [H]N=C1C([H])=c([H])c(OC([H])([H])[H])c([H])=C1[H]
+
+Molecule: 27_diethylamine
+Start SMILES: [H][NH+](C([H])([H])C([H])([H])[H])C([H])([H])C([H])([H])[H]
+End SMILES:   [H][NH+](C([H])([H])C([H])([H])[H])C([H])([H])C([H])([H])[H]
+
+Molecule: 24_2-chloroaniline
+Start SMILES: [H]/N=C1/C([H])=c([H])c([H])c([H])c1Cl
+End SMILES:   [H]/N=C1/C([H])=c([H])c([H])c([H])c1Cl
+
+Molecule: 28_piperidine
+Start SMILES: [H]N1C([H])([H])C([H])([H])C([H])([H])[C+]([H])([H])C1([H])[H]
+End SMILES:   [H]N1C([H])([H])C([H])([H])C([H])([H])[C+]([H])([H])C1([H])[H]
 
 Molecule: 25_4-chloroaniline
-Start SMILES: [H]nc1c([H])=c([H])[c-](Cl)c([H])=C1[H]
-End SMILES:   [H]nc1c([H])=c([H])[c-](Cl)c([H])=C1[H]
+Start SMILES: [H]N=C1C([H])=c([H])c(Cl)c([H])=C1[H]
+End SMILES:   [H]N=C1C([H])=c([H])c(Cl)c([H])=C1[H]
 
-Molecule: 27_diethylamine
-Start SMILES: [H]N(C([H])([H])C([H])([H])[H])C([H])([H])C([H])([H])[H]
-End SMILES:   [H]N(C([H])([H])C([H])([H])[H])C([H])([H])C([H])([H])[H]
+Molecule: 29_pyrrolidine
+Start SMILES: [H]N1C([H])([H])C([H])([H])[C+]([H])([H])C1([H])[H]
+End SMILES:   [H]N1C([H])([H])C([H])([H])[C+]([H])([H])C1([H])[H]
 
 Molecule: 26_4-methylaniline
-Start SMILES: [H]nc1c([H])=c([H])[c-](C([H])([H])[H])c([H])=c1[H]
-End SMILES:   [H]nc1c([H])=c([H])[c-](C([H])([H])[H])c([H])=c1[H]
+Start SMILES: [H]c([H])c1c([H])=c([H])c(n([H])[H])c([H])=c1[H]
+End SMILES:   [H]c([H])c1c([H])=c([H])c(n([H])[H])c([H])=c1[H]
 
-Molecule: 28_piperidine
-Start SMILES: [H]N1C([H])([H])C([H])([H])C([H])([H])C([H])([H])C1([H])[H]
-End SMILES:   [H]N1C([H])([H])C([H])([H])C([H])([H])C([H])([H])C1([H])[H]
+Molecule: 30_diphenylamine
+Start SMILES: [H]c1c([H])c([H])c(N([H])c2c([H])c([H])c([H])[c+]([H])c2[H])c([H])c1[H]
+End SMILES:   [H]c1c([H])c([H])c([H])c(n([H])c2c([H])=[c+]([H])c([H])c([H])c2[H])c=1[H]
+WARNING! Topology for molecule 30_diphenylamine has changed!
 
 Molecule: 27_diethylamine
-Start SMILES: [H]C([H])([H])C([H])([H])[N-]C([H])([H])C([H])([H])[H]
-End SMILES:   [H]C([H])([H])C([H])([H])[N-]C([H])([H])C([H])([H])[H]
+Start SMILES: [H]C(N([H])C([H])([H])C([H])([H])[H])C([H])([H])[H]
+End SMILES:   [H]C(N([H])C([H])([H])C([H])([H])[H])C([H])([H])[H]
+
+Molecule: 31_n-methylaniline
+Start SMILES: [H]c1c([H])[c+]([H])=c([H])c(n([H])C([H])([H])[H])c=1[H]
+End SMILES:   [H]c1c([H])[c+]([H])=c([H])c(n([H])C([H])([H])[H])c=1[H]
 
 Molecule: 29_pyrrolidine
-Start SMILES: [H]N1C([H])([H])C([H])([H])C([H])([H])C1([H])[H]
-End SMILES:   [H]N1C([H])([H])C([H])([H])C([H])([H])C1([H])[H]
+Start SMILES: [H]C1([H])NC([H])([H])C([H])([H])C1([H])[H]
+End SMILES:   [H]C1([H])NC([H])([H])C([H])([H])C1([H])[H]
+
+Molecule: 32_1,2,3-trimethoxybenzene
+Start SMILES: [H]c1c(OC([H])([H])[H])c(OC([H])([H])[H])c(OC([H])([H])[H])[c+]([H])c1[H]
+End SMILES:   [H]c1c(OC([H])([H])[H])-c(oC([H])([H])[H])-c(OC([H])([H])[H])[c+]([H])c1[H]
+WARNING! Topology for molecule 32_1,2,3-trimethoxybenzene has changed!
 
 Molecule: 28_piperidine
-Start SMILES: [H]C1([H])NC([H])([H])[C-]([H])([H])C([H])([H])C1([H])[H]
-End SMILES:   [H]C1([H])NC([H])([H])[C-]([H])([H])C([H])([H])C1([H])[H]
-
-Molecule: 30_diphenylamine
-Start SMILES: [H]c1c([H])c([H])c(N([H])c2c([H])c([H])c([H])c([H])c2[H])c([H])c1[H]
-End SMILES:   [H]c1c([H])c([H])c(N([H])c2c([H])c([H])c([H])c([H])c2[H])c([H])c1[H]
-
-Molecule: 29_pyrrolidine
-Start SMILES: [H]C1([H])NC([H])([H])[C-]([H])([H])C1([H])[H]
-End SMILES:   [H]C1([H])NC([H])([H])[C-]([H])([H])C1([H])[H]
-
-Molecule: 31_n-methylaniline
-Start SMILES: [H]c1c([H])c([H])c(N([H])C([H])([H])[H])c([H])c1[H]
-End SMILES:   [H]c1c([H])c([H])c(N([H])C([H])([H])[H])c([H])c1[H]
-
-Molecule: 30_diphenylamine
-Start SMILES: [H]c1c([H])c([H])c([H])c(nc2c([H])=[c-]([H])c([H])c([H])c2[H])c=1[H]
-End SMILES:   [H]c1c([H])c([H])c([H])c(nc2c([H])=[c-]([H])c([H])c([H])c2[H])c=1[H]
-
-Molecule: 31_n-methylaniline
-Start SMILES: [H]c1c([H])[c-]([H])=c([H])c(nC([H])([H])[H])c=1[H]
-End SMILES:   [H]c1c([H])[c-]([H])=c([H])c(nC([H])([H])[H])c=1[H]
-
-Molecule: 32_1,2,3-trimethoxybenzene
-Start SMILES: [H]c1c([H])c(OC([H])([H])[H])c(OC([H])([H])[H])c(OC([H])([H])[H])c1[H]
-End SMILES:   [H]c1c([H])c(OC([H])([H])[H])c(OC([H])([H])[H])c(OC([H])([H])[H])c1[H]
+Start SMILES: [H]C1([H])NC([H])([H])C([H])([H])C([H])([H])C1([H])[H]
+End SMILES:   [H]C1([H])NC([H])([H])C([H])([H])C([H])([H])C1([H])[H]
 
 Molecule: 33_1,2,4-trimethoxybenzene
-Start SMILES: [H]c1c([H])c(OC([H])([H])[H])c(OC([H])([H])[H])c([H])c1OC([H])([H])[H]
-End SMILES:   [H]c1c([H])c(OC([H])([H])[H])c(OC([H])([H])[H])c([H])c1OC([H])([H])[H]
+Start SMILES: [H]c1c(OC([H])([H])[H])-c(OC([H])([H])[H])c([H])[c+](OC([H])([H])[H])c1[H]
+End SMILES:   [H]c1c(oC([H])([H])[H])-c(OC([H])([H])[H])c([H])[c+](OC([H])([H])[H])c=1[H]
+WARNING! Topology for molecule 33_1,2,4-trimethoxybenzene has changed!
 
-Molecule: 32_1,2,3-trimethoxybenzene
-Start SMILES: [H]c1c(OC([H])([H])[H])c(OC([H])([H])[H])c(OC([H])[H])[c-]([H])c1[H]
-End SMILES:   [H]c1c(OC([H])([H])[H])c(OC([H])([H])[H])c(OC([H])[H])[c-]([H])c1[H]
+Molecule: 31_n-methylaniline
+Start SMILES: [H]c1c([H])c([H])=c([H])c(nC([H])([H])[H])c=1[H]
+End SMILES:   [H]c1c([H])c([H])=c([H])c(nC([H])([H])[H])c=1[H]
 
 Molecule: 34_1,2-dimethoxybenzene
-Start SMILES: [H]c1c([H])c([H])c(OC([H])([H])[H])c(OC([H])([H])[H])c1[H]
-End SMILES:   [H]c1c([H])c([H])c(OC([H])([H])[H])c(OC([H])([H])[H])c1[H]
+Start SMILES: [H]c1c(OC([H])([H])[H])-c(OC([H])([H])[H])c([H])[c+]([H])c1[H]
+End SMILES:   [H]c1c(oC([H])([H])[H])-c(oC([H])([H])[H])c([H])=[c+]([H])c=1[H]
+WARNING! Topology for molecule 34_1,2-dimethoxybenzene has changed!
+
+Molecule: 30_diphenylamine
+Start SMILES: [H]c1c([H])c([H])c([H])c(nc2c([H])=c([H])c([H])c([H])c2[H])c=1[H]
+End SMILES:   [H]c1c([H])c([H])c([H])c(nc2c([H])=c([H])c([H])c([H])c2[H])c=1[H]
 
 Molecule: 35_1,3-dimethoxybenzene
-Start SMILES: [H]c1c([H])c(OC([H])([H])[H])c([H])c(OC([H])([H])[H])c1[H]
-End SMILES:   [H]c1c([H])c(OC([H])([H])[H])c([H])c(OC([H])([H])[H])c1[H]
+Start SMILES: [H]c1c(OC([H])([H])[H])c([H])c(OC([H])([H])[H])[c+]([H])c1[H]
+End SMILES:   [H]c1c([H])[c+]([H])-c(oC([H])([H])[H])c([H])c-1OC([H])([H])[H]
+WARNING! Topology for molecule 35_1,3-dimethoxybenzene has changed!
 
 Molecule: 33_1,2,4-trimethoxybenzene
-Start SMILES: [H]c1c(OC([H])([H])[H])c(OC([H])[H])c([H])[c-](OC([H])([H])[H])c1[H]
-End SMILES:   [H]c1c(OC([H])([H])[H])c(OC([H])[H])c([H])[c-](OC([H])([H])[H])c1[H]
+Start SMILES: [H]c1c([H])c(OC([H])[H])c(OC([H])([H])[H])c([H])c1OC([H])([H])[H]
+End SMILES:   [H]c1c([H])c(OC([H])[H])c(OC([H])([H])[H])c([H])c1OC([H])([H])[H]
+
+Molecule: 36_1,4-dimethoxybenzene
+Start SMILES: [H]c1c(OC([H])([H])[H])c([H])=[c+]([H])c(OC([H])([H])[H])c=1[H]
+End SMILES:   [H]c1c(oC([H])([H])[H])c([H])=[c+]([H])c(oC([H])([H])[H])c=1[H]
+WARNING! Topology for molecule 36_1,4-dimethoxybenzene has changed!
+
+Molecule: 32_1,2,3-trimethoxybenzene
+Start SMILES: [H]c1c([H])c(OC([H])([H])[H])c(OC([H])[H])c(OC([H])([H])[H])c1[H]
+End SMILES:   [H]c1c([H])c(OC([H])([H])[H])c(OC([H])[H])c(OC([H])([H])[H])c1[H]
+
+Molecule: 37_3,2-methoxy-phenoxyl-1,2-propanediol
+Start SMILES: [H]OC([H])([H])C([H])(O[H])C([H])([H])[OH+]c1c([H])c([H])c([H])c([H])c-1OC([H])([H])[H]
+End SMILES:   [H]OC([H])([H])C([H])(O[H])C([H])([H])[OH+]c1c([H])c([H])c([H])=c([H])c-1oC([H])([H])[H]
+WARNING! Topology for molecule 37_3,2-methoxy-phenoxyl-1,2-propanediol has changed!
 
 Molecule: 34_1,2-dimethoxybenzene
-Start SMILES: [H]c1c(OC([H])([H])[H])c(OC([H])[H])c([H])[c-]([H])c1[H]
-End SMILES:   [H]c1c(OC([H])([H])[H])c(OC([H])[H])c([H])[c-]([H])c1[H]
+Start SMILES: [H]c1c([H])c([H])c(OC([H])([H])[H])c(OC([H])[H])c1[H]
+End SMILES:   [H]c1c([H])c([H])c(OC([H])([H])[H])c(OC([H])[H])c1[H]
 
-Molecule: 36_1,4-dimethoxybenzene
-Start SMILES: [H]c1c([H])c(OC([H])([H])[H])c([H])c([H])c1OC([H])([H])[H]
-End SMILES:   [H]c1c([H])c(OC([H])([H])[H])c([H])c([H])c1OC([H])([H])[H]
+Molecule: 38_anisole
+Start SMILES: [H]c1c([H])c([H])=[c+]([H])c(oC([H])([H])[H])c=1[H]
+End SMILES:   [H]C1=c([H])c([H])c([H])=[c+]([H])c1oC([H])([H])[H]
+WARNING! Topology for molecule 38_anisole has changed!
 
 Molecule: 35_1,3-dimethoxybenzene
-Start SMILES: [H]c1c(OC([H])([H])[H])c([H])c(OC([H])[H])[c-]([H])c1[H]
-End SMILES:   [H]c1c(OC([H])([H])[H])c([H])c(OC([H])[H])[c-]([H])c1[H]
+Start SMILES: [H]c1c([H])c(OC([H])[H])c([H])c(OC([H])([H])[H])c1[H]
+End SMILES:   [H]c1c([H])c(OC([H])[H])c([H])c(OC([H])([H])[H])c1[H]
+
+Molecule: 39_3-amino-L-tyrosine
+Start SMILES: [H]Oc1c([H])c([H])c(C([H])([H])C([H])(c(o)=[OH+])N([H])([H])[H])c([H])c-1n([H])[H]
+End SMILES:   [H]Oc1c([H])c([H])c(C([H])([H])C([H])(c(o)=[OH+])N([H])([H])[H])c([H])c-1n([H])[H]
 
 Molecule: 36_1,4-dimethoxybenzene
-Start SMILES: [H]c1c([H])c(OC([H])([H])[H])[c-]([H])c([H])c1OC([H])[H]
-End SMILES:   [H]c1c([H])c(OC([H])([H])[H])[c-]([H])c([H])c1OC([H])[H]
-
-Molecule: 37_3,2-methoxy-phenoxyl-1,2-propanediol
-Start SMILES: [H]OC([H])([H])C([H])(O[H])C([H])([H])Oc1c([H])c([H])c([H])c([H])c1OC([H])([H])[H]
-End SMILES:   [H]OC([H])([H])C([H])(O[H])C([H])([H])Oc1c([H])c([H])c([H])c([H])c1OC([H])([H])[H]
-
-Molecule: 38_anisole
-Start SMILES: [H]c1c([H])c([H])c(OC([H])([H])[H])c([H])c1[H]
-End SMILES:   [H]c1c([H])c([H])c(OC([H])([H])[H])c([H])c1[H]
-
-Molecule: 37_3,2-methoxy-phenoxyl-1,2-propanediol
-Start SMILES: [H]OC([H])(C([H])([H])O)C([H])([H])[O-]c1c([H])c([H])c([H])c([H])c1OC([H])([H])[H]
-End SMILES:   [H]OC([H])(C([H])([H])O)C([H])([H])[O-]c1c([H])c([H])c([H])c([H])c1OC([H])([H])[H]
-
-Molecule: 39_3-amino-L-tyrosine
-Start SMILES: [H]Oc1c([H])c([H])c(C([H])([H])C([H])(c(=O)o)N([H])([H])[H])c([H])c1N([H])[H]
-End SMILES:   [H]Oc1c([H])c([H])c(C([H])([H])C([H])(c(=O)o)N([H])([H])[H])c([H])c1N([H])[H]
-
-Molecule: 38_anisole
-Start SMILES: [H]c1c([H])c([H])[c-]([H])c(OC([H])[H])c1[H]
-End SMILES:   [H]c1c([H])c([H])[c-]([H])c(OC([H])[H])c1[H]
+Start SMILES: [H]c1c([H])c(OC([H])([H])[H])c([H])c([H])c1OC([H])[H]
+End SMILES:   [H]c1c([H])c(OC([H])([H])[H])c([H])c([H])c1OC([H])[H]
 
 Molecule: 40_3-methoxy-L-tyrosine
-Start SMILES: [H]Oc1c([H])c([H])c(C([H])([H])C([H])(c(=O)o)N([H])([H])[H])c([H])c1OC([H])([H])[H]
-End SMILES:   [H]Oc1c([H])c([H])c(C([H])([H])C([H])(c(=O)o)N([H])([H])[H])c([H])c1OC([H])([H])[H]
+Start SMILES: [H]Oc1c([H])c([H])c(C([H])([H])C([H])(c(=O)[oH+])N([H])([H])[H])c([H])c-1OC([H])([H])[H]
+End SMILES:   [H]oc1c([H])=c([H])c(C([H])([H])C([H])(C(=O)=[OH+])N([H])([H])[H])c([H])c-1OC([H])([H])[H]
+WARNING! Topology for molecule 40_3-methoxy-L-tyrosine has changed!
 
-Molecule: 39_3-amino-L-tyrosine
-Start SMILES: [H]Oc1c([H])c([H])c(C([H])([H])C([H])(c(o)[o-])N([H])[H])c([H])c1N([H])[H]
-End SMILES:   [H]Oc1c([H])c([H])c(C([H])([H])C([H])(c(o)[o-])N([H])[H])c([H])c1N([H])[H]
-
-Molecule: 40_3-methoxy-L-tyrosine
-Start SMILES: [H]Oc1c([H])c([H])c(C([H])([H])C([H])(c(o)[o-])N([H])[H])c([H])c1OC([H])([H])[H]
-End SMILES:   [H]Oc1c([H])c([H])c(C([H])([H])C([H])(c(o)[o-])N([H])[H])c([H])c1OC([H])([H])[H]
+Molecule: 38_anisole
+Start SMILES: [H]c1c([H])c([H])c(OC([H])[H])c([H])c1[H]
+End SMILES:   [H]c1c([H])c([H])c(OC([H])[H])c([H])c1[H]
 
 Molecule: 41_3-nitro-L-tyrosine
-Start SMILES: [H]Oc1c([H])c([H])c(C([H])([H])C([H])(c(=O)o)N([H])([H])[H])c([H])c1-n(o)o
-End SMILES:   [H]Oc1c([H])=c([H])c(C([H])([H])C([H])(c(=O)o)N([H])([H])[H])c([H])c1-n(o)o
+Start SMILES: [H]oc1c([H])=c([H])c(C([H])([H])C([H])(C(=O)=[OH+])N([H])([H])[H])c([H])c1-n1o-o1
+End SMILES:   C1=O[O+]=1.[H]Oc1c([H])=c([H])c(C([H])([H])C([H])N([H])([H])[H])c([H])c1-n(o)o
 WARNING! Topology for molecule 41_3-nitro-L-tyrosine has changed!
-
-Molecule: 42_3-fluoro-L-tyrosine
-Start SMILES: [H]Oc1c([H])c([H])c(C([H])([H])C([H])(c(=O)o)N([H])([H])[H])c([H])c1F
-End SMILES:   [H]Oc1c([H])c([H])c(C([H])([H])C([H])(c(=O)o)N([H])([H])[H])c([H])c1F
-
-Molecule: 41_3-nitro-L-tyrosine
-Start SMILES: [H]Oc1c([H])=c([H])c(C([H])([H])C([H])(c(o)[o-])N([H])[H])c([H])c1-n(o)o
-End SMILES:   [H]Oc1c([H])=c([H])c(C([H])([H])C([H])(c(o)[o-])N([H])[H])c([H])c1-n(o)o
-
-Molecule: 43_L-tyrosine
-Start SMILES: [H]Oc1c([H])c([H])c(C([H])([H])C([H])(c(=O)o)N([H])([H])[H])c([H])c1[H]
-End SMILES:   [H]Oc1c([H])c([H])c(C([H])([H])C([H])(c(=O)o)N([H])([H])[H])c([H])c1[H]
-
-Molecule: 42_3-fluoro-L-tyrosine
-Start SMILES: [H]Oc1c([H])c([H])c(C([H])([H])C([H])(c(o)[o-])N([H])[H])c([H])c1F
-End SMILES:   [H]Oc1c([H])c([H])c(C([H])([H])C([H])(c(o)[o-])N([H])[H])c([H])c1F
-
-Molecule: 43_L-tyrosine
-Start SMILES: [H]Oc1c([H])c([H])c(C([H])([H])C([H])(c(o)[o-])N([H])[H])c([H])c1[H]
-End SMILES:   [H]Oc1c([H])c([H])c(C([H])([H])C([H])(c(o)[o-])N([H])[H])c([H])c1[H]
+WARNING!!! Molecule 41_3-nitro-L-tyrosine has undergone dissociation!!!

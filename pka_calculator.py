@@ -3,7 +3,7 @@ from multiprocessing import Process, Queue
 from rdkit import Chem
 
 verbose = 1
-dry_run = 1
+dry_run = 0
 
 max_cores = 4
 cores_per_process = 1
@@ -163,7 +163,7 @@ class Calculate_pka:
 
         pka_correction = 164.22  # kcal/mol
 
-        pka = ((protonated_energy - deprotonated_energy) * 627.5 + 270.29 - pka_correction) \
+        pka = - ((protonated_energy - deprotonated_energy) * 627.5 + 270.29 - pka_correction) \
             / (2.303 * 1.98720425864083 / 1000 * 298.15) 
 
         print(f'pKa for molecule {self.molecule} = {pka}')
@@ -179,8 +179,8 @@ while molecule_list.empty() is False:
     if used_cores()+cores_per_process <= max_cores:
         try:
             molecule = molecule_list.get_nowait()
-            singlet = Calculate_pka(molecule, 0, 0)
-            worker = Process(target=singlet.calculate_pka, args=())
+            runtype = Calculate_pka(molecule, 1, 1)
+            worker = Process(target=runtype.calculate_pka, args=())
             processes.append(worker)
             worker.start()
             cores_list.put(cores_per_process)
