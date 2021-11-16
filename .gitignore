@@ -4,6 +4,8 @@ deprotonate/
 xtb_sp_deprot/
 xtb_opt_deprot/
 
+logfile.out
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

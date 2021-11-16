@@ -2,7 +2,7 @@ import os, shutil
 from multiprocessing import Process, Queue
 from rdkit import Chem
 
-verbose = 1
+verbose = 0
 dry_run = 1
 
 max_cores = 4
