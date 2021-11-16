@@ -2,8 +2,8 @@ import os, shutil
 from multiprocessing import Process, Queue
 from rdkit import Chem
 
-verbose = 0
-dry_run = 0
+verbose = 1
+dry_run = 1
 
 max_cores = 4
 cores_per_process = 1
@@ -161,12 +161,11 @@ class Calculate_pka:
         )
         self.compare_smiles(start_smiles, end_smiles)
 
-        pka_correction = 117.92
+        pka_correction = 164.22  # kcal/mol
 
-        pka = ((protonated_energy - deprotonated_energy) * 627.5 + 270.29) \
-            / (2.303 * 1.98720425864083 / 1000 * 298.15) - pka_correction
+        pka = ((protonated_energy - deprotonated_energy) * 627.5 + 270.29 - pka_correction) \
+            / (2.303 * 1.98720425864083 / 1000 * 298.15) 
 
-        print(f'Protonated energy = {protonated_energy} | Deprotonated energy = {deprotonated_energy}')
         print(f'pKa for molecule {self.molecule} = {pka}')
 
         cores_list.get() 
