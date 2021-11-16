@@ -3,7 +3,7 @@ from multiprocessing import Process, Queue
 from rdkit import Chem
 
 verbose = 0
-dry_run = 1
+dry_run = 0
 
 max_cores = 4
 cores_per_process = 1
@@ -52,7 +52,7 @@ class Calculate_pka:
 
         os.chdir('../../')
         
-        return start_smiles, start_mol
+        return start_smiles
 
 
     def optimization(self, xyz_dir, foldername, charge, spin):
@@ -75,9 +75,13 @@ class Calculate_pka:
         end_mol = Chem.MolFromMolFile(mol_file, sanitize=False, removeHs=False, strictParsing=False)
         end_smiles = Chem.MolToSmiles(end_mol)
 
+        for line in open(self.molecule+'.out', 'r'):
+            if "TOTAL FREE ENERGY" in line:
+                energy = float(line.split()[-3])
+        
         os.chdir('../../')
         
-        return end_smiles, end_mol
+        return end_smiles, energy
 
 
     def deprotonate(self, xyz_dir, foldername, charge, spin):
@@ -122,13 +126,13 @@ class Calculate_pka:
 
     def calculate_pka(self):
 
-        start_smiles, start_mol = self.single_point(
+        start_smiles = self.single_point(
             './xyz_files', 
             'xtb_sp/'+self.molecule+'/', 
             self.charge, 
             self.spin
         )
-        end_smiles, end_mol = self.optimization(
+        end_smiles, protonated_energy = self.optimization(
             './xyz_files', 
             'xtb_opt/'+self.molecule+'/', 
             self.charge, 
@@ -143,21 +147,31 @@ class Calculate_pka:
             self.spin
         )
 
-        start_smiles, start_mol = self.single_point(
+        start_smiles = self.single_point(
             './deprotonate/xyz_files', 
             'xtb_sp_deprot/'+self.molecule+'/', 
-            self.charge+1, 
+            self.charge-1, 
             self.spin
         )
-        end_smiles, end_mol = self.optimization(
+        end_smiles, deprotonated_energy = self.optimization(
             './deprotonate/xyz_files', 
             'xtb_opt_deprot/'+self.molecule+'/', 
-            self.charge+1, 
+            self.charge-1, 
             self.spin
         )
         self.compare_smiles(start_smiles, end_smiles)
 
+        pka_correction = 117.92
+
+        pka = ((protonated_energy - deprotonated_energy) * 627.5 + 270.29) \
+            / (2.303 * 1.98720425864083 / 1000 * 298.15) - pka_correction
+
+        print(f'Protonated energy = {protonated_energy} | Deprotonated energy = {deprotonated_energy}')
+        print(f'pKa for molecule {self.molecule} = {pka}')
+
         cores_list.get() 
+
+        return pka
 
 with open('logfile.out', 'w') as out:
     out.write('--- Running pKa calculation ---\n')
