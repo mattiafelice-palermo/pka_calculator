@@ -100,18 +100,20 @@ class Calculate_pka:
         
         os.chdir('../../')
 
-    def compare_smiles(self, start, end):
+    def compare_smiles(self, start_smiles, end_smiles):
 
         if verbose == 1:
-            print(f'Molecule: {self.molecule}\nStart SMILES: {start}\nEnd SMILES:   {end}\n')
-        
-        if start != end:
-            print(f'WARNING! Topology for molecule {self.molecule} has changed!\n')
+            print(f'Molecule: {self.molecule}\nStart SMILES: {start_smiles}\nEnd SMILES:   {end_smiles}\n')
+            if start_smiles != end_smiles:
+                print(f'WARNING! Topology for molecule {self.molecule} has changed!\n')
+
+        if '.' in end_smiles:
+            print(f'WARNING!!! Molecule {self.molecule} has undergone dissociation!!!')
 
 
     def calculate_pka(self):
 
-        print('### Protonated ###')
+        print(f'Optimizing {self.molecule} protonated form')
 
         start_smiles, start_mol = self.single_point(
             './xyz_files', 
@@ -127,7 +129,7 @@ class Calculate_pka:
         )
         self.compare_smiles(start_smiles, end_smiles)
 
-        print('### Deprotonated ###')
+        print(f'Optimizing {self.molecule} deprotonated form')
 
         self.deprotonate(
             './xyz_files', 
