@@ -3,7 +3,7 @@ from multiprocessing import Process, Queue
 from rdkit import Chem
 
 verbose = 1
-dry_run = 1
+dry_run = 0
 
 
 max_cores = 4
@@ -115,7 +115,7 @@ class Calculate_pka:
 
     def compare_smiles(self, start_smiles, end_smiles):
 
-        with open('logfile.out', 'a') as out:
+        with open('warnings.out', 'a') as out:
 
             if verbose == 1:
                 out.write(f'\nMolecule: {self.molecule}\nStart SMILES: {start_smiles}\nEnd SMILES:   {end_smiles}\n')
@@ -128,40 +128,42 @@ class Calculate_pka:
 
     def calculate_pka(self):
 
+        # radical cation starting single point
         start_smiles = self.single_point(
             './xyz_files', 
             'xtb_sp/'+self.molecule+'/', 
-            self.charge, 
-            self.spin
+            self.charge+1, 
+            self.spin+1
         )
+        # radical cation optimization
         end_smiles, protonated_energy = self.optimization(
             './xyz_files', 
             'xtb_opt/'+self.molecule+'/', 
-            self.charge, 
-            self.spin
+            self.charge+1, 
+            self.spin+1
         )
         self.compare_smiles(start_smiles, end_smiles)
 
-        ### REOPTIMIZE GEOMETRY FOR DEPROTONATION INPUT!!! ###
-
+        # optimizing and deprotonating neutral molecule
         self.deprotonate(
             './xyz_files', 
             'deprotonate/'+self.molecule+'/',
             self.charge, 
             self.spin
         )
-
+        # neutral radical single point
         start_smiles = self.single_point(
             './deprotonate/xyz_files', 
             'xtb_sp_deprot/'+self.molecule+'/', 
-            self.charge-1, 
-            self.spin
+            self.charge, 
+            self.spin+1
         )
+        # neutral radical optimization
         end_smiles, deprotonated_energy = self.optimization(
             './deprotonate/xyz_files', 
             'xtb_opt_deprot/'+self.molecule+'/', 
-            self.charge-1, 
-            self.spin
+            self.charge, 
+            self.spin+1
         )
         self.compare_smiles(start_smiles, end_smiles)
 
@@ -170,20 +172,19 @@ class Calculate_pka:
         pka = - ((protonated_energy - deprotonated_energy) * 627.5 + 270.29 - pka_correction) \
             / (2.303 * 1.98720425864083 / 1000 * 298.15) 
 
-        print(f'pKa for molecule {self.molecule} = {pka}')
+        print(f'pKa for molecule {self.molecule} radical cation = {pka}')
 
         cores_list.get() 
 
         return pka
 
-with open('logfile.out', 'w') as out:
-    out.write('--- Running pKa calculation ---\n')
 
 while molecule_list.empty() is False:
     if used_cores()+cores_per_process <= max_cores:
+        
         try:
             molecule = molecule_list.get_nowait()
-            runtype = Calculate_pka(molecule, 1, 1)
+            runtype = Calculate_pka(molecule, 0, 0)
             worker = Process(target=runtype.calculate_pka, args=())
             processes.append(worker)
             worker.start()
