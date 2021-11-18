@@ -2,9 +2,8 @@ import os, shutil
 from multiprocessing import Process, Queue
 from rdkit import Chem
 
-verbose = 1
+verbose = 0
 dry_run = 0
-
 
 max_cores = 4
 cores_per_process = 1
@@ -103,8 +102,8 @@ class Calculate_pka:
         os.chdir(foldername)
 
         if dry_run != 1:
-            os.system(f'xtb {self.molecule}.xyz --gfn2 --chrg {charge-1} --uhf {spin-1} --alpb water --ohess -P {cores_per_process} > {self.molecule}.out')
-            os.system(f'crest xtbopt.xyz --gfn2 --chrg {charge-1} --uhf {spin-1} --alpb water -deprotonate -T {cores_per_process} > {molecule}.out')
+            os.system(f'xtb {self.molecule}.xyz --gfn2 --chrg {charge-1} --uhf {spin-1} --alpb water --ohess -P {cores_per_process} > {self.molecule}_opt.out')
+            os.system(f'crest xtbopt.xyz --gfn2 --chrg {charge-1} --uhf {spin-1} --alpb water -deprotonate -T {cores_per_process} > {molecule}_deprot.out')
         
         shutil.copyfile(
             'deprotonated.xyz', 
@@ -181,7 +180,7 @@ class Calculate_pka:
 
 while molecule_list.empty() is False:
     if used_cores()+cores_per_process <= max_cores:
-        
+
         try:
             molecule = molecule_list.get_nowait()
             runtype = Calculate_pka(molecule, 0, 0)
