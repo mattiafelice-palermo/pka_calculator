@@ -102,8 +102,8 @@ class Calculate_pka:
         os.chdir(foldername)
 
         if dry_run != 1:
-            os.system(f'xtb {self.molecule}.xyz --gfn2 --chrg {charge-1} --uhf {spin-1} --alpb water --ohess -P {cores_per_process} > {self.molecule}_opt.out')
-            os.system(f'crest xtbopt.xyz --gfn2 --chrg {charge-1} --uhf {spin-1} --alpb water -deprotonate -T {cores_per_process} > {molecule}_deprot.out')
+            os.system(f'xtb {self.molecule}.xyz --gfn2 --chrg {charge} --uhf {spin} --alpb water --ohess -P {cores_per_process} > {self.molecule}_opt.out')
+            os.system(f'crest xtbopt.xyz --gfn2 --chrg {charge} --uhf {spin} --alpb water -deprotonate -T {cores_per_process} > {molecule}_deprot.out')
         
         shutil.copyfile(
             'deprotonated.xyz', 
@@ -112,17 +112,17 @@ class Calculate_pka:
         
         os.chdir('../../')
 
-    def compare_smiles(self, start_smiles, end_smiles):
+    def compare_smiles(self, start_smiles, end_smiles, type):
 
         with open('warnings.out', 'a') as out:
 
             if verbose == 1:
-                out.write(f'\nMolecule: {self.molecule}\nStart SMILES: {start_smiles}\nEnd SMILES:   {end_smiles}\n')
+                out.write(f'\nMolecule: {self.molecule}\n {type} Start SMILES: {start_smiles}\nEnd SMILES:   {end_smiles}\n')
                 if start_smiles != end_smiles:
-                    out.write(f'WARNING! Topology for molecule {self.molecule} has changed!\n')
+                    out.write(f'WARNING! Topology for molecule {self.molecule} {type} has changed!\n')
 
             if '.' in end_smiles:
-                out.write(f'WARNING!!! Molecule {self.molecule} has undergone dissociation!!!\n')
+                out.write(f'WARNING!!! Molecule {self.molecule} {type} has undergone dissociation!!!\n')
 
 
     def calculate_pka(self):
@@ -141,7 +141,7 @@ class Calculate_pka:
             self.charge+1, 
             self.spin+1
         )
-        self.compare_smiles(start_smiles, end_smiles)
+        self.compare_smiles(start_smiles, end_smiles, "radical cation")
 
         # optimizing and deprotonating neutral molecule
         self.deprotonate(
@@ -164,7 +164,7 @@ class Calculate_pka:
             self.charge, 
             self.spin+1
         )
-        self.compare_smiles(start_smiles, end_smiles)
+        self.compare_smiles(start_smiles, end_smiles, "neutral radical")
 
         pka_correction = 164.22  # kcal/mol
 
