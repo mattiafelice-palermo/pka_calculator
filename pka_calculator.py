@@ -5,23 +5,9 @@ from rdkit import Chem
 verbose = 0
 dry_run = 0
 
-max_cores = 4
 cores_per_process = 1
 
-molecule_list = Queue()
-cores_list = Queue()
-
-for xyz in os.listdir('./xyz_files'):
-    molecule_list.put(xyz.strip('.xyz'))
-
-processes = []
-
-def used_cores():
-    ncores = cores_per_process*cores_list.qsize()
-    return ncores
-
-
-class Calculate_pka:
+class pKaCalculator:
 
     def __init__(self, molecule, charge, spin):
 
@@ -31,7 +17,6 @@ class Calculate_pka:
 
 
     def single_point(self, xyz_dir, foldername, charge, spin):
-        
         if not os.path.exists(foldername):
             os.makedirs(foldername)
             
@@ -43,7 +28,8 @@ class Calculate_pka:
         os.chdir(foldername)
 
         if dry_run != 1:
-            os.system(f'xtb {self.molecule}.xyz --gfn2 --chrg {charge} --uhf {spin} --alpb water -P {cores_per_process} > {self.molecule}.out')
+            #os.system("echo $OMP_NUM_THREADS")
+            os.system(f'xtb {self.molecule}.xyz --gfn2 --chrg {charge} --uhf {spin} --alpb water  > {self.molecule}.out 2>> {self.molecule}.out')
         
         mol_file = [ f for f in os.listdir('.') if f.endswith('.mol') ][-1]
 
@@ -68,7 +54,7 @@ class Calculate_pka:
         os.chdir(foldername)
     
         if dry_run != 1:
-            os.system(f'xtb {self.molecule}.xyz --gfn2 --chrg {charge} --uhf {spin} --alpb water --ohess -P {cores_per_process} > {self.molecule}.out')
+            os.system(f'xtb {self.molecule}.xyz --gfn2 --chrg {charge} --uhf {spin} --alpb water --ohess  > {self.molecule}.out 2>> {self.molecule}.out')
 
         mol_file = [ f for f in os.listdir('.') if f.endswith('.mol') ][-1]
 
@@ -102,8 +88,8 @@ class Calculate_pka:
         os.chdir(foldername)
 
         if dry_run != 1:
-            os.system(f'xtb {self.molecule}.xyz --gfn2 --chrg {charge} --uhf {spin} --alpb water --ohess -P {cores_per_process} > {self.molecule}_opt.out')
-            os.system(f'crest xtbopt.xyz --gfn2 --chrg {charge} --uhf {spin} --alpb water -deprotonate -T {cores_per_process} > {molecule}_deprot.out')
+            os.system(f'xtb {self.molecule}.xyz --gfn2 --chrg {charge} --uhf {spin} --alpb water --ohess  > {self.molecule}_opt.out  2>> {self.molecule}_opt.out')
+            os.system(f'crest xtbopt.xyz --gfn2 --chrg {charge} --uhf {spin} --alpb water -deprotonate -T {cores_per_process} > {self.molecule}_deprot.out  2>> {self.molecule}_deprot.out')
         
         shutil.copyfile(
             'deprotonated.xyz', 
@@ -171,26 +157,7 @@ class Calculate_pka:
         pka = - ((protonated_energy - deprotonated_energy) * 627.5 + 270.29 - pka_correction) \
             / (2.303 * 1.98720425864083 / 1000 * 298.15) 
 
-        print(f'pKa for molecule {self.molecule} radical cation = {pka}')
-
-        cores_list.get() 
-
-        return pka
+        #print(f'pKa for molecule {self.molecule} radical cation = {pka}')
 
 
-while molecule_list.empty() is False:
-    if used_cores()+cores_per_process <= max_cores:
-
-        try:
-            molecule = molecule_list.get_nowait()
-            runtype = Calculate_pka(molecule, 0, 0)
-            worker = Process(target=runtype.calculate_pka, args=())
-            processes.append(worker)
-            worker.start()
-            cores_list.put(cores_per_process)
-        except:
-            print('Empty queue')
-
-for process in processes:
-    process.join()
-
+        return self.molecule, pka
