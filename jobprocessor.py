@@ -13,6 +13,8 @@ from typing import Callable, List
 
 
 class JobProcessor:
+    """Queue any number of different functions and execute them in parallel."""
+
     def __init__(
         self, jobs_list: List[Callable], maxcores: int = -1, cores_per_job: int = 1
     ):
@@ -35,20 +37,13 @@ class JobProcessor:
             raise TypeError("cores_per_job must be a positive integer")
 
         # Create job queue
-        self.workers: List[
-            Process
-        ] = []  # list of functions (jobs) to create jobs queue
+        self.workers: List[Process] = []  # list of (jobs) to create jobs queue
         self.jobs_queue: Queue = Queue()
 
+        self.number_of_jobs: int  # will be populated by self.add_job
+
         for job in jobs_list:
-            self.jobs_queue.put_nowait(job)
-
-        self.number_of_jobs: int = self.jobs_queue.qsize()
-
-        print(
-            f"Running {self.number_of_jobs} jobs on {self.maxcores} cores,"
-            f"{self.cores_per_job} cores per job"
-        )
+            self.add_job(job)
 
         self.running_jobs: Queue = Queue()  # queue for *counting* running jobs
         self._results_queue: Queue = Queue()  # queue containing jobs results
@@ -72,11 +67,8 @@ class JobProcessor:
 
         """
 
-        def decorated_function():
-            """
-            Decorated function to be returned.
-            """
-
+        def decorated_function() -> None:
+            """Decorate function to be returned."""
             os.environ["OMP_NUM_THREADS"] = str(
                 self.cores_per_job
             )  # set maximum cores per job
@@ -93,7 +85,24 @@ class JobProcessor:
 
         return decorated_function
 
+    def add_job(self, job: Callable) -> None:
+        """Add job to be processed."""
+        if callable(job):
+            self.jobs_queue.put_nowait(job)
+            self.number_of_jobs = self.jobs_queue.qsize()
+        else:
+            raise TypeError(
+                f"The provided job \x1b[1;37;34m{job}\x1b[0m is not callable"
+                " and cannot be processed."
+            )
+
     def run(self) -> List:
+        """Run jobs in the job list."""
+
+        print(
+            f"Running {self.number_of_jobs} jobs on {self.maxcores} cores,"
+            f"{self.cores_per_job} cores per job"
+        )
 
         job_counter: int = 0
 
@@ -108,13 +117,17 @@ class JobProcessor:
                     job: Callable = self.jobs_queue.get_nowait()  # get job from queue
                     decorated_job: Callable = self._job_completion_tracker(job)
                     worker: Process = Process(target=decorated_job, args=())
-                    self.workers.append(worker)
-                    worker.start()
+                    self.workers.append(worker)  # to be joined later
+                    worker.start()  # start job
                     job_counter += 1
                     print(f"Starting job {job_counter}")
-                    self.running_jobs.put_nowait(job_counter)
+                    self.running_jobs.put_nowait(job_counter)  # count running jobs
 
                 except queue.Empty:
+                    # Sometimes queue is empty because of the asynchronous
+                    # nature of the queue object. Check if the number of
+                    # obtained results is the same as the number of jobs before
+                    # returning
                     if self._results_queue.qsize() == self.number_of_jobs:
                         print("No more jobs to execute")
                         break
